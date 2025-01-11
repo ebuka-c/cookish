@@ -12,15 +12,6 @@ class AppValidators {
 
   //EMAIL VALIDATOR
 
-  // static String? validateMyEmail(String? value) {
-  //   if (value!.isEmpty) {
-  //     return "Field cannot be empty";
-  //   } else if (!GetUtils.isEmail(value)) {
-  //     return "Input a valid email";
-  //   }
-  //   return null;
-  // }
-
   static bool validateMyEmail(String? value) {
     if (value == null || value.isEmpty) {
       return false;
@@ -32,13 +23,12 @@ class AppValidators {
 
   //PASSWORD VALIDATORS
   static String? strongPswdValidator(String? value) {
-    RegExp strongPwsdRegex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
+    RegExp strongPwsdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[A-Z]).{6,}$');
     if (value!.isEmpty) {
       return 'Password field must not be empty';
     } else {
       if (!strongPwsdRegex.hasMatch(value)) {
-        return 'Not Strong Enough. Must contain: \n- uppercase letter\n- number\n- special character\n- Be atleast 6 characters long';
+        return 'Not Strong Enough. Must contain: \n- uppercase letter\n- lower case letter\n- Be atleast 6 characters long';
       } else {
         return null;
       }

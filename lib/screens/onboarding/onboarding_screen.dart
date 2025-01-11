@@ -41,7 +41,9 @@ class OnboardingScreen extends StatelessWidget {
               ),
               const Spacer(),
               AppButton(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.signUpScreen);
+                },
                 text: 'Get Started',
               ),
               SizedBox(height: 16.0.h),
@@ -59,7 +61,7 @@ class OnboardingScreen extends StatelessWidget {
                           color: AppColors.primaryText),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Get.offAllNamed(AppRoutes.signInScreen);
+                          Get.toNamed(AppRoutes.signInScreen);
                         },
                     )
                   ],

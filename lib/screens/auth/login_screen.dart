@@ -34,10 +34,6 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.transparent,
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () => Get.back,
-          child: const Icon(Icons.arrow_back),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,14 +68,21 @@ class LoginScreen extends StatelessWidget {
                             : null,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         onChanged: validateEmail,
-                        // validator: AppValidators.validateMyEmail,
+                        validator: (value) {
+                          if (value?.isEmpty ?? false) {
+                            return "Field cannot be empty";
+                          } else if (!GetUtils.isEmail(value ?? '')) {
+                            return 'Invalid email';
+                          }
+                          return null;
+                        },
                         bottomMargin: 14.0.h,
                         hasSubtitle: false,
                         obscureText: false);
                   }),
                   Obx(() {
                     return AuthTextField(
-                        controller: _authC.passwordController,
+                        controller: _authC.loginPwdController,
                         title: 'Password',
                         hasSubtitle: false,
                         suffixIcon: GestureDetector(
@@ -89,8 +92,8 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Icon(
                             _authC.passwordObscure.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
                             color: AppColors.primaryText,
                           ),
                         ),
@@ -108,7 +111,8 @@ class LoginScreen extends StatelessWidget {
                   AppButton(
                     onTap: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        print('login');
+                        // print('login');
+                        Get.toNamed(AppRoutes.onboarding2);
                       }
                     },
                     text: 'Login',
@@ -199,7 +203,7 @@ class LoginScreen extends StatelessWidget {
                                 color: AppColors.primaryText),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.offAllNamed(AppRoutes.signInScreen);
+                                Get.offAllNamed(AppRoutes.signUpScreen);
                               },
                           )
                         ],

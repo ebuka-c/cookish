@@ -1,3 +1,5 @@
+import 'package:cookish/screens/auth/sign_up_screen.dart';
+import 'package:cookish/screens/onboarding/onboarding2.dart';
 import 'package:cookish/screens/onboarding/onboarding_screen.dart';
 import 'package:cookish/screens/onboarding/splash2.dart';
 import 'package:get/get.dart';
@@ -23,8 +25,18 @@ class RoutePages {
       transition: Transition.fadeIn,
     ),
     GetPage(
+      name: AppRoutes.onboarding2,
+      page: () => const Onboarding2(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
       name: AppRoutes.signInScreen,
       page: () => const LoginScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.signUpScreen,
+      page: () => const SignUpScreen(),
       transition: Transition.fadeIn,
     ),
     // GetPage(

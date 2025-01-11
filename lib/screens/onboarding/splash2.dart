@@ -23,7 +23,7 @@ class _Splash2State extends State<Splash2> {
   }
 
   goNext() {
-    Get.toNamed(AppRoutes.onboardingScreen);
+    Get.offAllNamed(AppRoutes.onboardingScreen);
   }
 
   @override
