@@ -1,0 +1,61 @@
+name: cookish
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  flutter_svg: ^2.0.17
+  device_preview: ^1.2.0
+  flutter_native_splash: ^2.4.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter_native_splash:
+  image: "assets/images/png/cookish2x.png"
+  color: "309F75"
+  android: true
+  ios: true
+  android_gravity: center # Center the image
+  # android_resize: true # Resize to fill
+  # android_scale: center_crop # Use center_crop
+  web: false
+  android_12:
+    image: assets/images/png/cookish2x.png
+    color: "#309F75"
+    icon_background_color: "#309F75"
+ 
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/png/
+    - assets/images/svg/
+  #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: Campton
+      fonts:
+        - asset: assets/fonts/CamptonMedium.otf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+    - family: CamptonLight
+      fonts:
+        - asset: assets/fonts/CamptonLight.otf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700

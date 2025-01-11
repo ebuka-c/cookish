@@ -1,0 +1,33 @@
+import 'package:cookish/screens/onboarding/onboarding_screen.dart';
+import 'package:cookish/screens/onboarding/splash2.dart';
+import 'package:get/get.dart';
+
+import '../screens/auth/login_screen.dart';
+import 'route_name.dart';
+
+class RoutePages {
+  static final List<GetPage> routes = [
+    // GetPage(
+    //     name: AppRoutes.splashScreen,
+    //     page: () => const SplashScreen(),
+    //     transition: Transition.fadeIn,
+    //     transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+        name: AppRoutes.splash2,
+        page: () => const Splash2(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(seconds: 1)),
+    GetPage(
+      name: AppRoutes.onboardingScreen,
+      page: () => const OnboardingScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.signInScreen,
+      page: () => const LoginScreen(),
+      transition: Transition.fadeIn,
+    ),
+    // GetPage(
+    // name: AppRoutes.emailConfirmOtp, page: () => const EmailConfirmOtp()),
+  ];
+}
