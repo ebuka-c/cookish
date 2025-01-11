@@ -11,9 +11,6 @@ class AppThemes {
     primaryTextTheme: TextTheme(
         titleSmall: titleSmall.copyWith(color: AppColors.primaryText)),
     scaffoldBackgroundColor: AppColors.appBackground,
-    // appBarTheme: AppBarTheme(
-    //   backgroundColor: AppColors.lightPrimaryColor,
-    // ),
     buttonTheme: const ButtonThemeData(
       buttonColor: AppColors.appPrimary,
     ),

@@ -1,7 +1,9 @@
 import 'package:cookish/constants/custom_textstyles.dart';
 import 'package:cookish/constants/images.dart';
+import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Onboarding2 extends StatefulWidget {
   const Onboarding2({super.key});
@@ -21,6 +23,31 @@ class _Onboarding2State extends State<Onboarding2> {
       setState(() {
         _animate = true;
       });
+    });
+  }
+
+  void navigateToNextScreen(int index) async {
+    setState(() {
+      slideOut = true; // Trigger slide-out animation
+      selectedIndex = index; // Identify the tapped container
+    });
+
+    // Wait for the animation to complete before navigating
+    await Future.delayed(const Duration(milliseconds: 450));
+
+    // Navigate to the corresponding screen using Get.to()
+    if (index == 0) {
+      Get.toNamed(AppRoutes.hausaDishes);
+    } else if (index == 1) {
+      Get.toNamed(AppRoutes.igboDishes);
+    } else if (index == 2) {
+      Get.toNamed(AppRoutes.yorubaDishes);
+    }
+
+    // Reset animation state when returning to this screen
+    setState(() {
+      slideOut = false;
+      selectedIndex = -1;
     });
   }
 
@@ -45,45 +72,66 @@ class _Onboarding2State extends State<Onboarding2> {
                 ),
               ),
               SizedBox(height: 30.0.h),
-              Center(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.easeOut,
-                  transform: Matrix4.translationValues(
-                    _animate ? 0 : screenWidth,
-                    0,
-                    0,
+              GestureDetector(
+                onTap: () => navigateToNextScreen(0),
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeOut,
+                    transform: Matrix4.translationValues(
+                      slideOut && selectedIndex == 0
+                          ? -screenWidth // Slide out to the left
+                          : (_animate
+                              ? 0
+                              : screenWidth), // Animate in from the right
+                      0,
+                      0,
+                    ),
+                    child: Image.asset(AppImages.hausa,
+                        width: 397.0.w, height: 120.0.h),
                   ),
-                  child: Image.asset(AppImages.hausa,
-                      width: 397.0.w, height: 120.0.h),
                 ),
               ),
               SizedBox(height: 15.0.h),
-              Center(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 900),
-                  curve: Curves.easeOut,
-                  transform: Matrix4.translationValues(
-                    _animate ? 0 : screenWidth, // Move from right to center
-                    0,
-                    0,
+              GestureDetector(
+                onTap: () => navigateToNextScreen(1),
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 900),
+                    curve: Curves.easeOut,
+                    transform: Matrix4.translationValues(
+                      slideOut && selectedIndex == 1
+                          ? -screenWidth // Slide out to the left
+                          : (_animate
+                              ? 0
+                              : screenWidth), // Animate in from the right
+                      0,
+                      0,
+                    ),
+                    child: Image.asset(AppImages.igbo,
+                        width: 397.0.w, height: 120.0.h),
                   ),
-                  child: Image.asset(AppImages.igbo,
-                      width: 397.0.w, height: 120.0.h),
                 ),
               ),
               SizedBox(height: 15.0.h),
-              Center(
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.easeOut,
-                  transform: Matrix4.translationValues(
-                    _animate ? 0 : screenWidth, // Move from right to center
-                    0,
-                    0,
+              GestureDetector(
+                onTap: () => navigateToNextScreen(2),
+                child: Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeOut,
+                    transform: Matrix4.translationValues(
+                      slideOut && selectedIndex == 2
+                          ? -screenWidth // Slide out to the left
+                          : (_animate
+                              ? 0
+                              : screenWidth), // Animate in from the right
+                      0,
+                      0,
+                    ),
+                    child: Image.asset(AppImages.yoruba,
+                        width: 397.0.w, height: 120.0.h),
                   ),
-                  child: Image.asset(AppImages.yoruba,
-                      width: 397.0.w, height: 120.0.h),
                 ),
               ),
             ],

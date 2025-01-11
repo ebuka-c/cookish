@@ -13,6 +13,7 @@ class AppColors {
   static const primaryText = Color(0xff1A1A1A);
   static const bottomNavInactive = Color(0xffB3B3B3);
   static const appBlue = Color(0xff1877F2);
+  static const homeBg = Color(0xfffffaf5);
   static const black = Colors.black;
   static const white = Colors.white;
   static const transparent = Colors.transparent;

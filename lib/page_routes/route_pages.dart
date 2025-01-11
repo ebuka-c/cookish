@@ -1,4 +1,7 @@
 import 'package:cookish/screens/auth/sign_up_screen.dart';
+import 'package:cookish/screens/categories/hausa/hausa_dishes.dart';
+import 'package:cookish/screens/categories/igbo/igbo_dishes.dart';
+import 'package:cookish/screens/categories/yoruba/yoruba_dishes.dart';
 import 'package:cookish/screens/onboarding/onboarding2.dart';
 import 'package:cookish/screens/onboarding/onboarding_screen.dart';
 import 'package:cookish/screens/onboarding/splash2.dart';
@@ -39,7 +42,22 @@ class RoutePages {
       page: () => const SignUpScreen(),
       transition: Transition.fadeIn,
     ),
-    // GetPage(
-    // name: AppRoutes.emailConfirmOtp, page: () => const EmailConfirmOtp()),
+
+    //CATEGORIES
+    GetPage(
+      name: AppRoutes.igboDishes,
+      page: () => const IgboDishes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.hausaDishes,
+      page: () => const HausaDishes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.yorubaDishes,
+      page: () => const YorubaDishes(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

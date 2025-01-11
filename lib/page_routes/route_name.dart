@@ -6,4 +6,7 @@ class AppRoutes {
   static const String signUpScreen = "/signup-screen";
   static const String signInScreen = "/signin-screen";
   //
+  static const String igboDishes = "/igboDishes";
+  static const String yorubaDishes = "/yorubaDishes";
+  static const String hausaDishes = "/hausaDishes";
 }
