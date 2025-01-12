@@ -11,7 +11,8 @@ import '../dialogs/logout_dialog.dart';
 final _authC = Get.find<AuthController>();
 
 class Settings extends StatelessWidget {
-  const Settings({super.key});
+  const Settings({super.key, this.color});
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,9 @@ class Settings extends StatelessWidget {
         child: InkWell(
           onTap: () async {
             //
-            final logOut = await logOutDialog(context: context);
+            final logOut = await logOutDialog(context: context, color: color);
             if (logOut ?? false) {
-              await _authC.logoutwEmailPwd();
+              await _authC.logout();
             }
           },
           child: Container(

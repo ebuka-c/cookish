@@ -14,9 +14,19 @@ class HausaDishes extends StatefulWidget {
 
 class _HausaDishesState extends State<HausaDishes> {
   int navIndex = 0;
+  String title = '';
 
   @override
   Widget build(BuildContext context) {
+    if (navIndex == 0) {
+      title = 'Native Hausa Cuisine';
+    } else if (navIndex == 1) {
+      title = 'Groceries';
+    } else if (navIndex == 2) {
+      title = 'Favourites';
+    } else {
+      title = 'Settings';
+    }
     return Scaffold(
       backgroundColor: AppColors.homeBg,
       appBar: AppBar(
@@ -24,8 +34,9 @@ class _HausaDishesState extends State<HausaDishes> {
         automaticallyImplyLeading: false,
         centerTitle: false,
         title: Text(
-          'Native Hausa Cuisine',
-          style: titleLarge.copyWith(color: AppColors.appPrimary),
+          title,
+          style: titleLarge.copyWith(
+              color: AppColors.appPrimary, fontWeight: FontWeight.w600),
         ),
       ),
       body: hausaScreens[navIndex],

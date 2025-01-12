@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookish/page_routes/route_name.dart';
+import 'package:cookish/services/firebase/data.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,6 +28,9 @@ class _HausaHomeState extends State<HausaHomeScreen> {
   int _currentIndex = 0;
   late Timer _timer;
 
+  List<Map<String, dynamic>> _hausaDishes = [];
+  bool _isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +45,28 @@ class _HausaHomeState extends State<HausaHomeScreen> {
         );
       }
     });
+    FirebaseFirestore.instance.collection('hausa').get();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      final querySnapshot =
+          await FirebaseFirestore.instance.collection('hausa').get();
+      final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+      setState(() {
+        _hausaDishes = data.cast<Map<String, dynamic>>();
+        _isLoading = false;
+      });
+      print('DATA FETCHED::::::::');
+    } catch (e) {
+      // Handle errors here
+      print('Error fetching data: $e');
+      setState(() {
+        _isLoading = false;
+      });
+      print('DATA NOT FETCHED::::::::');
+    }
   }
 
   @override
@@ -59,8 +86,23 @@ class _HausaHomeState extends State<HausaHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchTextField(controller: _hausaFoodC),
-            SizedBox(height: 19.0.h),
-            //builder1
+            GestureDetector(
+                onTap: () {
+                  print(_hausaDishes);
+                },
+                child: Container(color: Colors.amber, height: 19.0.h)),
+
+            // Display loading indicator or data
+            // if (_isLoading)
+            //   Center(
+            //     child: CircularProgressIndicator(),
+            //   )
+            // else if (_hausaDishes.isEmpty)
+            //   Center(
+            //     child: Text('No data available'),
+            //   )
+            // else
+            //   //builder1
             Stack(
               alignment: Alignment.topRight,
               children: [
