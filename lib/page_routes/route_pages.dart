@@ -1,7 +1,15 @@
 import 'package:cookish/screens/auth/sign_up_screen.dart';
-import 'package:cookish/screens/categories/hausa/hausa_dishes.dart';
-import 'package:cookish/screens/categories/igbo/igbo_dishes.dart';
-import 'package:cookish/screens/categories/yoruba/yoruba_dishes.dart';
+import 'package:cookish/screens/categ/breakfast_categ.dart';
+import 'package:cookish/screens/categ/dessert_categ.dart';
+import 'package:cookish/screens/categ/soup_categ.dart';
+import 'package:cookish/screens/categ/stew_categ.dart';
+import 'package:cookish/screens/categ/swallow_categ.dart';
+import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/hausa/hausa_dishes.dart';
+import 'package:cookish/screens/tribes/igbo/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/igbo/igbo_dishes.dart';
+import 'package:cookish/screens/tribes/yoruba/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/yoruba/yoruba_dishes.dart';
 import 'package:cookish/screens/onboarding/onboarding2.dart';
 import 'package:cookish/screens/onboarding/onboarding_screen.dart';
 import 'package:cookish/screens/onboarding/splash2.dart';
@@ -57,6 +65,52 @@ class RoutePages {
     GetPage(
       name: AppRoutes.yorubaDishes,
       page: () => const YorubaDishes(),
+      transition: Transition.fadeIn,
+    ),
+
+    //hausa
+    GetPage(
+      name: AppRoutes.allHausaCateg,
+      page: () => const AllHausaCateg(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.soupCategH,
+      page: () => const SoupCateg(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.stewCategH,
+      page: () => const StewCateg(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.swallowCategH,
+      page: () => const SwallowCateg(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.breakfastCategH,
+      page: () => const BreakfastCateg(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.dessertCategH,
+      page: () => const DessertCateg(),
+      transition: Transition.fadeIn,
+    ),
+    //igbo
+
+    GetPage(
+      name: AppRoutes.allIgboCateg,
+      page: () => const AllIgboCateg(),
+      transition: Transition.fadeIn,
+    ),
+
+    //yoruba
+    GetPage(
+      name: AppRoutes.allYorubaCateg,
+      page: () => const AllYorubaCateg(),
       transition: Transition.fadeIn,
     ),
   ];

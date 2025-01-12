@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
@@ -134,12 +136,18 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                   'Categories',
                   style: titleMedium.copyWith(fontWeight: FontWeight.w600),
                 ),
-                Text(
-                  'See All ',
-                  style: bodyLarge.copyWith(
-                      color: AppColors.appPrimary,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.appPrimary),
+                InkWell(
+                  onTap: () {
+                    var color = AppColors.appPrimary;
+                    Get.toNamed(AppRoutes.allHausaCateg, arguments: color);
+                  },
+                  child: Text(
+                    'See All ',
+                    style: bodyLarge.copyWith(
+                        color: AppColors.appPrimary,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.appPrimary),
+                  ),
                 ),
               ],
             ),
