@@ -51,14 +51,19 @@ class _HausaHomeState extends State<HausaHomeScreen> {
 
   Future<void> _fetchData() async {
     try {
-      final querySnapshot =
-          await FirebaseFirestore.instance.collection('hausa').get();
-      final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection('hausa')
+          .doc("0fxU4ipiSi6tQrpgFV7x")
+          .get();
+      // final data = querySnapshot.docs.map((doc) => doc.data()).toList();
+      print('DATA:::::::: ${docSnapshot.data()}'); //test
+
+      var data = (docSnapshot.data()?["all_dishes"]).toList();
       setState(() {
         _hausaDishes = data.cast<Map<String, dynamic>>();
         _isLoading = false;
       });
-      print('DATA FETCHED::::::::');
+      print('DATA FETCHED:::::::: $data'); //test
     } catch (e) {
       // Handle errors here
       print('Error fetching data: $e');
