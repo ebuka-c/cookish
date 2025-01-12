@@ -19,6 +19,8 @@ dependencies:
   flutter_native_splash: ^2.4.4
   firebase_core: ^3.10.0
   firebase_auth: ^5.4.0
+  cloud_firestore: ^5.6.1
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

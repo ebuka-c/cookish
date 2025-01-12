@@ -7,7 +7,7 @@ import '../../constants/colors.dart';
 import '../../constants/custom_textstyles.dart';
 import '../../widgets/app_button.dart';
 
-Future<bool>? logOutDialog({required BuildContext context}) async {
+Future<bool>? logOutDialog({required BuildContext context, color}) async {
   final controller = Get.find<AuthController>();
 
   return await showDialog(
@@ -62,6 +62,7 @@ Future<bool>? logOutDialog({required BuildContext context}) async {
                             color: AppColors.white,
                             fontWeight: FontWeight.w600,
                           ),
+                          btnColor: color,
                           text: 'Log out',
                         );
                       })

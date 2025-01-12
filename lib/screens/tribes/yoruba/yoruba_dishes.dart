@@ -13,9 +13,19 @@ class YorubaDishes extends StatefulWidget {
 
 class _YorubaDishesState extends State<YorubaDishes> {
   int navIndex = 0;
+  String title = '';
 
   @override
   Widget build(BuildContext context) {
+    if (navIndex == 0) {
+      title = 'Native Hausa Cuisine';
+    } else if (navIndex == 1) {
+      title = 'Groceries';
+    } else if (navIndex == 2) {
+      title = 'Favourites';
+    } else {
+      title = 'Settings';
+    }
     return Scaffold(
       backgroundColor: AppColors.homeBg,
       appBar: AppBar(
@@ -23,8 +33,9 @@ class _YorubaDishesState extends State<YorubaDishes> {
         automaticallyImplyLeading: false,
         centerTitle: false,
         title: Text(
-          'Native Yoruba Cuisine',
-          style: titleLarge.copyWith(color: AppColors.appPurple),
+          title,
+          style: titleLarge.copyWith(
+              color: AppColors.appPurple, fontWeight: FontWeight.w600),
         ),
       ),
       body: yorubaScreens[navIndex],
