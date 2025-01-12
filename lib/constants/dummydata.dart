@@ -1,3 +1,4 @@
+import 'package:cookish/constants/colors.dart';
 import 'package:cookish/screens/tribes/hausa/hausa_home.dart';
 import 'package:cookish/screens/tribes/igbo/igbo_home.dart';
 import 'package:cookish/screens/tribes/yoruba/yoruba_home_screen.dart';
@@ -27,19 +28,25 @@ List<Widget> hausaScreens = const [
   HausaHomeScreen(),
   Groceries(),
   Favourites(),
-  Settings()
+  Settings(
+    color: AppColors.appPrimary,
+  ),
 ];
 
 List<Widget> igboScreens = const [
   IgboHomeScreen(),
   Groceries(),
   Favourites(),
-  Settings()
+  Settings(
+    color: AppColors.appRed,
+  )
 ];
 
 List<Widget> yorubaScreens = const [
   YorubaHomeScreen(),
   Groceries(),
   Favourites(),
-  Settings()
+  Settings(
+    color: AppColors.appPurple,
+  )
 ];

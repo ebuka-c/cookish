@@ -76,7 +76,7 @@ class AuthController extends GetxController {
   }
 
   //logout
-  Future<bool> logoutwEmailPwd() async {
+  Future<bool> logout() async {
     isLoading.value = true;
     try {
       await FirebaseAuth.instance.signOut();

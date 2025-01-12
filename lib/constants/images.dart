@@ -15,6 +15,7 @@ class AppImages {
   static const igbo = "$imgPath/igbo.png";
   static const yoruba = "$imgPath/yoruba.png";
   static const tuwo = "$imgPath/tuwo.png";
+  static const dishPlaceholder = "$imgPath/serving-dish.png";
 
   //:LIST OF JPEG IMAGES://
   static const miyan = "$jpgPath/miyan.jpg";
