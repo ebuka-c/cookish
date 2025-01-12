@@ -27,7 +27,7 @@ class SlideIndicators extends StatelessWidget {
                 shape: BoxShape.circle,
                 color:
                     currentIndex == index ? currentIndexColor : AppColors.white,
-                border: Border.all(width: 1, color: AppColors.appPrimary)),
+                border: Border.all(width: 1, color: currentIndexColor)),
           ),
         ),
       ),

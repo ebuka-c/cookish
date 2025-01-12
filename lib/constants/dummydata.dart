@@ -1,6 +1,6 @@
-import 'package:cookish/screens/categories/hausa/hausa_home.dart';
-import 'package:cookish/screens/categories/igbo/igbo_home.dart';
-import 'package:cookish/screens/categories/yoruba/yoruba_home_screen.dart';
+import 'package:cookish/screens/tribes/hausa/hausa_home.dart';
+import 'package:cookish/screens/tribes/igbo/igbo_home.dart';
+import 'package:cookish/screens/tribes/yoruba/yoruba_home_screen.dart';
 import 'package:cookish/screens/nav_screens.dart/favourites.dart';
 import 'package:cookish/screens/nav_screens.dart/groceries.dart';
 import 'package:cookish/screens/nav_screens.dart/settings.dart';

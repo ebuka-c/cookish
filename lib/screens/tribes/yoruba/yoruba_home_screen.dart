@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
@@ -142,6 +144,8 @@ class _YorubaHomeScreenState extends State<YorubaHomeScreen> {
                 InkWell(
                   onTap: () {
                     //see all
+                    var color = AppColors.appPurple;
+                    Get.toNamed(AppRoutes.allYorubaCateg, arguments: color);
                   },
                   child: Text(
                     'See All ',

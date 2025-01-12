@@ -4,7 +4,7 @@ class AppColors {
   static const appPrimary = Color(0xff309F75);
   static const textfieldBorder = Color(0xffCCCCCC);
   static const errorBorder = Color(0xffE55B48);
-  static const appRed = Color(0xffF21400);
+  static const appRed = Color(0xffFF6347);
   static const appPurple = Color(0xffA800C1);
   static const appBackground = Color(0xffF9FFFD);
   static const inactiveBtnState = Color(0xffE6E6E6);

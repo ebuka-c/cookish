@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
@@ -143,6 +145,8 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                 InkWell(
                   onTap: () {
                     //see all
+                    var color = AppColors.appRed;
+                    Get.toNamed(AppRoutes.allIgboCateg, arguments: color);
                   },
                   child: Text(
                     'See All ',

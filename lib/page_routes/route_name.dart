@@ -9,4 +9,15 @@ class AppRoutes {
   static const String igboDishes = "/igboDishes";
   static const String yorubaDishes = "/yorubaDishes";
   static const String hausaDishes = "/hausaDishes";
+  //
+  static const String allHausaCateg = "/allHausaCateg";
+  static const String soupCategH = "/soupCategH";
+  static const String stewCategH = "/stewCategH";
+  static const String swallowCategH = "/swallowCategH";
+  static const String breakfastCategH = "/breakfastCategH";
+  static const String dessertCategH = "/dessertCategH";
+  //
+  static const String allIgboCateg = "/allIgboCateg";
+  //
+  static const String allYorubaCateg = "/allYorubaCateg";
 }
