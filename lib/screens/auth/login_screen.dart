@@ -108,17 +108,27 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20.0.h),
-                  AppButton(
-                    onTap: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        // print('login');
-                        Get.toNamed(AppRoutes.onboarding2);
-                      }
-                    },
-                    text: 'Login',
-                    textColor: AppColors.lightText2,
-                    btnColor: AppColors.inactiveBtnState,
-                  ),
+                  Obx(() {
+                    return AppButton(
+                      onTap: _authC.isLoading.value
+                          ? null
+                          : () async {
+                              if (_formKey.currentState?.validate() ?? false) {
+                                var status = await _authC.loginwEmailPwd(
+                                    _authC.emailController.text.trim(),
+                                    _authC.loginPwdController.text.trim());
+
+                                if (status) {
+                                  Get.toNamed(AppRoutes.onboarding2);
+                                }
+                              }
+                            },
+                      isLoading: _authC.isLoading.value ? true : false,
+                      text: 'Login',
+                      textColor: AppColors.white,
+                      btnColor: AppColors.appPrimary,
+                    );
+                  }),
                   SizedBox(height: 20.0.h),
                   Row(
                     children: <Widget>[

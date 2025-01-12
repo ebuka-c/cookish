@@ -4,6 +4,7 @@ import 'package:cookish/screens/categ/dessert_categ.dart';
 import 'package:cookish/screens/categ/soup_categ.dart';
 import 'package:cookish/screens/categ/stew_categ.dart';
 import 'package:cookish/screens/categ/swallow_categ.dart';
+import 'package:cookish/screens/nav_screens.dart/settings.dart';
 import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
 import 'package:cookish/screens/tribes/hausa/hausa_dishes.dart';
 import 'package:cookish/screens/tribes/igbo/all_categories/all_categ.dart';
@@ -111,6 +112,13 @@ class RoutePages {
     GetPage(
       name: AppRoutes.allYorubaCateg,
       page: () => const AllYorubaCateg(),
+      transition: Transition.fadeIn,
+    ),
+
+    //settings
+    GetPage(
+      name: AppRoutes.settings,
+      page: () => const Settings(),
       transition: Transition.fadeIn,
     ),
   ];

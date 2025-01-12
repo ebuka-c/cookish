@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../constants/colors.dart';
 import '../../constants/custom_textstyles.dart';
 import '../../constants/images.dart';
@@ -72,7 +71,7 @@ class SignUpScreen extends StatelessWidget {
                       obscureText: false),
                   Obx(() {
                     return AuthTextField(
-                        controller: _authC.emailController,
+                        controller: _authC.signUpEmailController,
                         keyboardType: TextInputType.emailAddress,
                         title: 'Email address',
                         bordersideColor:
@@ -169,13 +168,22 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: 20.0.h),
                   Obx(() {
                     return AppButton(
-                      onTap: !_authC.acceptTerms.value
+                      onTap: (!_authC.acceptTerms.value &&
+                              _authC.isLoading.value)
                           ? null
-                          : () {
+                          : () async {
                               if (_formKey.currentState?.validate() ?? false) {
-                                print('signup');
+                                // print('signup');
+                                var status = await _authC.signUpwEmailPwd(
+                                    _authC.signUpEmailController.text.trim(),
+                                    _authC.signUpPwdC.text.trim());
+
+                                if (status) {
+                                  Get.toNamed(AppRoutes.onboarding2);
+                                }
                               }
                             },
+                      isLoading: _authC.isLoading.value ? true : false,
                       text: 'Create an account',
                       textColor: _authC.acceptTerms.value
                           ? AppColors.white
