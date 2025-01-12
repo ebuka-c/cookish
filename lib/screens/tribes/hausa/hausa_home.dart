@@ -90,7 +90,7 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                 onTap: () {
                   print(_hausaDishes);
                 },
-                child: Container(color: Colors.amber, height: 19.0.h)),
+                child: SizedBox(height: 19.0.h)),
 
             // Display loading indicator or data
             // if (_isLoading)

@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: AppThemes().lightTheme,
       getPages: RoutePages.routes,
-      // initialRoute: AppRoutes.settings,
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
