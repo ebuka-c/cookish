@@ -20,4 +20,6 @@ class AppRoutes {
   static const String allIgboCateg = "/allIgboCateg";
   //
   static const String allYorubaCateg = "/allYorubaCateg";
+  //settings
+  static const String settings = "/settings";
 }

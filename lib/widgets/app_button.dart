@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 import '../constants/custom_textstyles.dart';
+import 'button_loader.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton(
@@ -14,7 +15,10 @@ class AppButton extends StatelessWidget {
       this.textColor,
       this.isLoading,
       this.textStyle,
-      this.btnChild});
+      this.padding,
+      this.btnChild,
+      this.width,
+      this.height});
   final Function()? onTap;
   final String? text;
   final Color? btnColor, textColor;
@@ -22,14 +26,17 @@ class AppButton extends StatelessWidget {
   final Widget? btnChild;
   final TextStyle? textStyle;
   final BoxBorder? border;
+  final double? width, height;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
-        height: 57.0.h,
+        // width: width ?? double.infinity,
+        height: height ?? 57.0.h,
+        padding: padding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           border: border,
@@ -38,7 +45,7 @@ class AppButton extends StatelessWidget {
         child: Center(
           child: btnChild ??
               ((isLoading ?? false)
-                  ? const CircularProgressIndicator()
+                  ? const AppLoadingIndicator()
                   : Text(
                       text ?? '',
                       style: textStyle ??
