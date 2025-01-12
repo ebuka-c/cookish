@@ -45,7 +45,6 @@ class _HausaHomeState extends State<HausaHomeScreen> {
         );
       }
     });
-    FirebaseFirestore.instance.collection('hausa').get();
     _fetchData();
   }
 
