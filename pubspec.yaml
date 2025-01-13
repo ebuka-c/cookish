@@ -21,16 +21,23 @@ dependencies:
   firebase_auth: ^5.4.0
   cloud_firestore: ^5.6.1
   iconsax: ^0.0.8
-  flutter_launcher_icons: ^0.14.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: "^0.14.2"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/png/play_store_512.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
 
 flutter_native_splash:
-  image: "assets/images/png/asset_4.png"
+  image: "assets/images/png/play_store_512.png"
   color: "#309F75"
   android: true
   ios: true
@@ -43,13 +50,15 @@ flutter_native_splash:
     color: "#309F75"
     icon_background_color: "#309F75"
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/png/launcher2.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "#309F75"
+
+
+# flutter_launcher_icons:play_store_512
+#   android: "launcher_icon"
+#   ios: true
+#   image_path: "assets/images/png/launcher2.png"
+#   min_sdk_android: 21 # android min sdk min:16, default 21
+#   adaptive_icon_background: "#ffffff"
+#   adaptive_icon_foreground: "#309F75"
 
 flutter:
 
