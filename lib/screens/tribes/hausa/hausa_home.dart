@@ -1,12 +1,12 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cookish/main.dart';
 import 'package:cookish/page_routes/route_name.dart';
-import 'package:cookish/services/firebase/data.dart';
 import 'package:cookish/utilities/extensions.dart';
+import 'package:cookish/widgets/button_loader.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
 import '../../../constants/dummydata.dart';
@@ -29,15 +29,14 @@ class _HausaHomeState extends State<HausaHomeScreen> {
   late Timer _timer;
 
   List<Map<String, dynamic>> _hausaDishes = [];
-  bool _isLoading = true;
+  var isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Start a timer to automatically slide every 3 seconds
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_pageController.hasClients) {
-        _currentIndex = (_currentIndex + 1) % 3; // Cycle through indexes
+        _currentIndex = (_currentIndex + 1) % 3;
         _pageController.animateToPage(
           _currentIndex,
           duration: const Duration(milliseconds: 500),
@@ -45,11 +44,11 @@ class _HausaHomeState extends State<HausaHomeScreen> {
         );
       }
     });
-    FirebaseFirestore.instance.collection('hausa').get();
     _fetchData();
   }
 
   Future<void> _fetchData() async {
+    isLoading = true;
     try {
       final docSnapshot = await FirebaseFirestore.instance
           .collection('hausa')
@@ -61,16 +60,12 @@ class _HausaHomeState extends State<HausaHomeScreen> {
       var data = (docSnapshot.data()?["all_dishes"]).toList();
       setState(() {
         _hausaDishes = data.cast<Map<String, dynamic>>();
-        _isLoading = false;
       });
-      print('DATA FETCHED:::::::: $data'); //test
-    } catch (e) {
-      // Handle errors here
-      print('Error fetching data: $e');
-      setState(() {
-        _isLoading = false;
-      });
-      print('DATA NOT FETCHED::::::::');
+      if (kDebugMode) print('DATA FETCHED:::::::: $data'); //test
+    } on FirebaseException catch (e) {
+      if (kDebugMode) print('Error fetching data: ${e.message}');
+    } finally {
+      isLoading = false;
     }
   }
 
@@ -91,23 +86,8 @@ class _HausaHomeState extends State<HausaHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchTextField(controller: _hausaFoodC),
-            GestureDetector(
-                onTap: () {
-                  print(_hausaDishes);
-                },
-                child: SizedBox(height: 19.0.h)),
+            SizedBox(height: 19.0.h),
 
-            // Display loading indicator or data
-            // if (_isLoading)
-            //   Center(
-            //     child: CircularProgressIndicator(),
-            //   )
-            // else if (_hausaDishes.isEmpty)
-            //   Center(
-            //     child: Text('No data available'),
-            //   )
-            // else
-            //   //builder1
             Stack(
               alignment: Alignment.topRight,
               children: [
@@ -115,15 +95,27 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                   constraints: BoxConstraints(maxHeight: 212.0.h),
                   child: PageView.builder(
                     controller: _pageController,
-                    itemCount: hausaDishes.length,
+                    itemCount:
+                        _hausaDishes.length < 3 ? _hausaDishes.length : 3,
                     onPageChanged: (index) {
                       setState(() {
                         _currentIndex = index;
                       });
                     },
                     itemBuilder: (context, index) {
-                      final dishes = hausaDishes[index]["dish"];
-                      final image = hausaDishes[index]["dishImage"];
+                      final dishes = _hausaDishes[index]["name"];
+                      // final image = _hausaDishes[index]['image'];
+
+                      if (isLoading ||
+                          _hausaDishes.isEmpty ||
+                          _hausaDishes.length < 3) {
+                        return const Center(
+                          child: AppLoadingIndicator(
+                            size: 20,
+                          ),
+                        );
+                      }
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -145,7 +137,8 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                               ],
                               image: DecorationImage(
                                   opacity: 0.7,
-                                  image: AssetImage(image),
+                                  image: AssetImage(
+                                      hausaDishes[index]['dishImage']),
                                   fit: BoxFit.cover),
                             ),
                             child: Center(
@@ -161,19 +154,24 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                     },
                   ),
                 ),
-                Text(
-                  'See All ',
-                  style: bodyLarge.copyWith(
-                      color: AppColors.appPrimary,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.appPrimary),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.hausaAll, arguments: _hausaDishes);
+                  },
+                  child: Text(
+                    'See All ',
+                    style: bodyLarge.copyWith(
+                        color: AppColors.appPrimary,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.appPrimary),
+                  ),
                 ),
               ],
             ),
             SlideIndicators(
                 currentIndexColor: AppColors.appPrimary,
                 currentIndex: _currentIndex,
-                length: hausaDishes.length),
+                length: 3),
             SizedBox(height: 22.0.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,7 +203,7 @@ class _HausaHomeState extends State<HausaHomeScreen> {
               child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: dishCateg.length,
+                itemCount: categsH.length,
                 itemBuilder: (context, index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,14 +213,15 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                         width: 150.0.w,
                         height: 150.0.h,
                         decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(AppImages.miyan),
-                                fit: BoxFit.cover),
+                            border: Border.all(color: AppColors.lightText2),
+                            image: DecorationImage(
+                                image: AssetImage(categsH[index]['image']),
+                                fit: BoxFit.fill),
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
                       Text(
-                        dishCateg[index],
+                        categsH[index]['categ'],
                         style: titleSmall.copyWith(fontWeight: FontWeight.w700),
                       )
                     ],
@@ -266,14 +265,14 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                         width: 150.0.w,
                         height: 150.0.h,
                         decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(AppImages.miyan),
+                            image: DecorationImage(
+                                image: AssetImage(recommended[index]['image']),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
                       Text(
-                        dietPlans[index],
+                        recommended[index]['plans'],
                         style: titleSmall.copyWith(fontWeight: FontWeight.w700),
                       )
                     ],

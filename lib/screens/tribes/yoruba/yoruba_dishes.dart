@@ -18,7 +18,7 @@ class _YorubaDishesState extends State<YorubaDishes> {
   @override
   Widget build(BuildContext context) {
     if (navIndex == 0) {
-      title = 'Native Hausa Cuisine';
+      title = 'Native Yoruba Cuisine';
     } else if (navIndex == 1) {
       title = 'Groceries';
     } else if (navIndex == 2) {

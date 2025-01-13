@@ -33,7 +33,7 @@ class _Onboarding2State extends State<Onboarding2> {
     });
 
     // Wait for the animation to complete before navigating
-    await Future.delayed(const Duration(milliseconds: 450));
+    await Future.delayed(const Duration(milliseconds: 460));
 
     // Navigate to the corresponding screen using Get.to()
     if (index == 0) {
@@ -80,7 +80,7 @@ class _Onboarding2State extends State<Onboarding2> {
                     curve: Curves.easeOut,
                     transform: Matrix4.translationValues(
                       slideOut && selectedIndex == 0
-                          ? -screenWidth // Slide out to the left
+                          ? -(screenWidth - 30) // Slide out to the left
                           : (_animate
                               ? 0
                               : screenWidth), // Animate in from the right

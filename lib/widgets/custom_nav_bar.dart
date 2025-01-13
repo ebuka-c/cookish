@@ -20,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        SizedBox(height: 85.0.h),
+        SizedBox(height: 93.5.h),
         Container(
           height: 70.0.h, // Set your desired height
           decoration: BoxDecoration(
@@ -58,8 +58,8 @@ class CustomBottomNavBar extends StatelessWidget {
           child: GestureDetector(
             onTap: onBtnTap,
             child: Container(
-              width: 40,
-              height: 40,
+              width: 45,
+              height: 45,
               decoration: BoxDecoration(
                 color: colorScheme,
                 shape: BoxShape.circle,

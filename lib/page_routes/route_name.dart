@@ -22,4 +22,9 @@ class AppRoutes {
   static const String allYorubaCateg = "/allYorubaCateg";
   //settings
   static const String settings = "/settings";
+
+  //all-foods
+  static const String hausaAll = "/hausaAll";
+  static const String igboAllDishes = "/igboAllDishes";
+  static const String yorubaAllDishes = "/yorubaAllDishes";
 }
