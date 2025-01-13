@@ -21,6 +21,7 @@ dependencies:
   firebase_auth: ^5.4.0
   cloud_firestore: ^5.6.1
   iconsax: ^0.0.8
+  flutter_launcher_icons: ^0.14.2
 
 dev_dependencies:
   flutter_test:
@@ -29,8 +30,8 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter_native_splash:
-  image: "assets/images/png/asset2.png"
-  color: "F9FFFD"
+  image: "assets/images/png/asset_4.png"
+  color: "#309F75"
   android: true
   ios: true
   android_gravity: center # Center the image
@@ -38,10 +39,17 @@ flutter_native_splash:
   # android_scale: center_crop # Use center_crop
   web: false
   android_12:
-    image: assets/images/png/asset2.png
-    color: "#F9FFFD"
-    icon_background_color: "#F9FFFD"
- 
+    image: assets/images/png/asset_4.png
+    color: "#309F75"
+    icon_background_color: "#309F75"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/png/launcher2.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "#309F75"
 
 flutter:
 
@@ -49,7 +57,7 @@ flutter:
 
   assets:
     - assets/images/png/
-    - assets/images/svg/
+    # - assets/images/svg/
     - assets/images/jpg/
   #   - images/a_dot_ham.jpeg
 
