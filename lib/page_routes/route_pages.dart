@@ -8,8 +8,10 @@ import 'package:cookish/screens/nav_screens.dart/settings.dart';
 import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
 import 'package:cookish/screens/tribes/hausa/hausa_dishes.dart';
 import 'package:cookish/screens/tribes/igbo/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/igbo/all_dishes/igbo_all.dart';
 import 'package:cookish/screens/tribes/igbo/igbo_dishes.dart';
 import 'package:cookish/screens/tribes/yoruba/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/yoruba/all_dishes/yoruba_all.dart';
 import 'package:cookish/screens/tribes/yoruba/yoruba_dishes.dart';
 import 'package:cookish/screens/onboarding/onboarding2.dart';
 import 'package:cookish/screens/onboarding/onboarding_screen.dart';
@@ -17,6 +19,7 @@ import 'package:cookish/screens/onboarding/splash2.dart';
 import 'package:get/get.dart';
 
 import '../screens/auth/login_screen.dart';
+import '../screens/tribes/hausa/all_dishes/hausa_all.dart';
 import 'route_name.dart';
 
 class RoutePages {
@@ -119,6 +122,23 @@ class RoutePages {
     GetPage(
       name: AppRoutes.settings,
       page: () => const Settings(),
+      transition: Transition.fadeIn,
+    ),
+
+    //all
+    GetPage(
+      name: AppRoutes.hausaAll,
+      page: () => const AllHausaDishes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.igboAllDishes,
+      page: () => const AllIgboDishes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.yorubaAllDishes,
+      page: () => const AllYorubaDishes(),
       transition: Transition.fadeIn,
     ),
   ];

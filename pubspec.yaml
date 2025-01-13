@@ -29,8 +29,8 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter_native_splash:
-  image: "assets/images/png/cookish2x.png"
-  color: "309F75"
+  image: "assets/images/png/asset2.png"
+  color: "F9FFFD"
   android: true
   ios: true
   android_gravity: center # Center the image
@@ -38,9 +38,9 @@ flutter_native_splash:
   # android_scale: center_crop # Use center_crop
   web: false
   android_12:
-    image: assets/images/png/cookish2x.png
-    color: "#309F75"
-    icon_background_color: "#309F75"
+    image: assets/images/png/asset2.png
+    color: "#F9FFFD"
+    icon_background_color: "#F9FFFD"
  
 
 flutter:

@@ -1,14 +1,11 @@
 import 'dart:async';
-
 import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
 import '../../../constants/dummydata.dart';
-import '../../../constants/images.dart';
 import '../../../widgets/search_textfield.dart';
 import '../../../widgets/slide_indicators.dart';
 
@@ -69,15 +66,15 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                   constraints: BoxConstraints(maxHeight: 212.0.h),
                   child: PageView.builder(
                     controller: _pageController,
-                    itemCount: hausaDishes.length,
+                    itemCount: 3,
                     onPageChanged: (index) {
                       setState(() {
                         _currentIndex = index;
                       });
                     },
                     itemBuilder: (context, index) {
-                      final dishes = hausaDishes[index]["dish"];
-                      final image = hausaDishes[index]["dishImage"];
+                      final dishes = igboDishes[index]["dish"];
+                      final image = igboDishes[index]["dishImage"];
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -91,23 +88,14 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                             margin: EdgeInsets.symmetric(horizontal: 10.0.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: AppColors.black,
+                              color: AppColors.white,
                               boxShadow: [
                                 BoxShadow(
                                     color: AppColors.black.withOpacity(0.1),
                                     offset: const Offset(0, 1))
                               ],
                               image: DecorationImage(
-                                  opacity: 0.7,
-                                  image: AssetImage(image),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Center(
-                              child: Text(
-                                dishes,
-                                style: const TextStyle(
-                                    fontSize: 24, color: AppColors.white),
-                              ),
+                                  image: AssetImage(image), fit: BoxFit.cover),
                             ),
                           ),
                         ],
@@ -118,6 +106,7 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                 InkWell(
                   onTap: () {
                     //see all
+                    Get.toNamed(AppRoutes.igboAllDishes);
                   },
                   child: Text(
                     'See All ',
@@ -132,7 +121,7 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
             SlideIndicators(
                 currentIndexColor: AppColors.appRed,
                 currentIndex: _currentIndex,
-                length: hausaDishes.length),
+                length: 3),
             SizedBox(height: 22.0.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,14 +164,14 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                         width: 150.0.w,
                         height: 150.0.h,
                         decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(AppImages.miyan),
+                            image: DecorationImage(
+                                image: AssetImage(categsI[index]['image']),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
                       Text(
-                        dishCateg[index],
+                        categsI[index]['categ'],
                         style: titleSmall.copyWith(fontWeight: FontWeight.w700),
                       )
                     ],
@@ -228,14 +217,14 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                         width: 150.0.w,
                         height: 150.0.h,
                         decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(AppImages.miyan),
+                            image: DecorationImage(
+                                image: AssetImage(recommended[index]['image']),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
                       Text(
-                        dietPlans[index],
+                        recommended[index]['plans'],
                         style: titleSmall.copyWith(fontWeight: FontWeight.w700),
                       )
                     ],
