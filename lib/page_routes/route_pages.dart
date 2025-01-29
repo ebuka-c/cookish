@@ -6,6 +6,7 @@ import 'package:cookish/screens/categ/stew_categ.dart';
 import 'package:cookish/screens/categ/swallow_categ.dart';
 import 'package:cookish/screens/nav_screens.dart/settings.dart';
 import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
+import 'package:cookish/screens/tribes/hausa/feedback_screen.dart';
 import 'package:cookish/screens/tribes/hausa/hausa_dishes.dart';
 import 'package:cookish/screens/tribes/igbo/all_categories/all_categ.dart';
 import 'package:cookish/screens/tribes/igbo/all_dishes/igbo_all.dart';
@@ -80,7 +81,7 @@ class RoutePages {
     ),
     GetPage(
       name: AppRoutes.soupCategH,
-      page: () => const SoupCateg(),
+      page: () => SoupCateg(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -139,6 +140,11 @@ class RoutePages {
     GetPage(
       name: AppRoutes.yorubaAllDishes,
       page: () => const AllYorubaDishes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.feedbackScreen,
+      page: () => const FeedbackScreen(),
       transition: Transition.fadeIn,
     ),
   ];

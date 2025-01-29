@@ -33,7 +33,7 @@ class AppImages {
   static const igboStew = "$jpgPath/stew.jpg";
   static const onugbu = "$jpgPath/onugbu.png";
   static const ukwa = "$jpgPath/ukwa.jpg";
-  static const abacha = "$jpgPath/abacha.png";
+  static const abacha = "$jpgPath/abacha.jpg";
   //yoruba
   static const amala = "$jpgPath/amala.png";
   static const yorubaStew = "$jpgPath/yoruba_stew.png";

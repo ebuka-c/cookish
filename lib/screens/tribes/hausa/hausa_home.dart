@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cookish/main.dart';
 import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/button_loader.dart';
@@ -10,7 +9,6 @@ import 'package:get/get.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/custom_textstyles.dart';
 import '../../../constants/dummydata.dart';
-import '../../../constants/images.dart';
 import '../../../widgets/search_textfield.dart';
 import '../../../widgets/slide_indicators.dart';
 
@@ -55,7 +53,7 @@ class _HausaHomeState extends State<HausaHomeScreen> {
           .doc("0fxU4ipiSi6tQrpgFV7x")
           .get();
       // final data = querySnapshot.docs.map((doc) => doc.data()).toList();
-      print('DATA:::::::: ${docSnapshot.data()}'); //test
+      if (kDebugMode) print('DATA:::::::: ${docSnapshot.data()}'); //test
 
       var data = (docSnapshot.data()?["all_dishes"]).toList();
       setState(() {
@@ -81,11 +79,14 @@ class _HausaHomeState extends State<HausaHomeScreen> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 11.0.h),
+        padding: EdgeInsets.symmetric(vertical: 11.0.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchTextField(controller: _hausaFoodC),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              child: SearchTextField(controller: _hausaFoodC),
+            ),
             SizedBox(height: 19.0.h),
 
             Stack(
@@ -119,14 +120,17 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            dishes,
-                            style: bodyMedium.copyWith(
-                                fontWeight: FontWeight.w700),
+                          Padding(
+                            padding: EdgeInsets.only(left: 16.0.w),
+                            child: Text(
+                              dishes,
+                              style: bodyMedium.copyWith(
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
                           Container(
                             height: 185.0.h,
-                            margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+                            margin: EdgeInsets.symmetric(horizontal: 16.0.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: AppColors.black,
@@ -154,16 +158,19 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                     },
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.hausaAll, arguments: _hausaDishes);
-                  },
-                  child: Text(
-                    'See All ',
-                    style: bodyLarge.copyWith(
-                        color: AppColors.appPrimary,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appPrimary),
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0.w),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.hausaAll, arguments: _hausaDishes);
+                    },
+                    child: Text(
+                      'See All ',
+                      style: bodyLarge.copyWith(
+                          color: AppColors.appPrimary,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.appPrimary),
+                    ),
                   ),
                 ),
               ],
@@ -177,21 +184,27 @@ class _HausaHomeState extends State<HausaHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  'Categories',
-                  style: titleMedium.copyWith(fontWeight: FontWeight.w600),
-                ),
-                InkWell(
-                  onTap: () {
-                    var color = AppColors.appPrimary;
-                    Get.toNamed(AppRoutes.allHausaCateg, arguments: color);
-                  },
+                Padding(
+                  padding: EdgeInsets.only(left: 16.0.w),
                   child: Text(
-                    'See All ',
-                    style: bodyLarge.copyWith(
-                        color: AppColors.appPrimary,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appPrimary),
+                    'Categories',
+                    style: titleMedium.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0.w),
+                  child: InkWell(
+                    onTap: () {
+                      var color = AppColors.appPrimary;
+                      Get.toNamed(AppRoutes.allHausaCateg, arguments: color);
+                    },
+                    child: Text(
+                      'See All ',
+                      style: bodyLarge.copyWith(
+                          color: AppColors.appPrimary,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.appPrimary),
+                    ),
                   ),
                 ),
               ],
@@ -212,6 +225,8 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                       Container(
                         width: 150.0.w,
                         height: 150.0.h,
+                        margin:
+                            index == 0 ? EdgeInsets.only(left: 16.0.h) : null,
                         decoration: BoxDecoration(
                             border: Border.all(color: AppColors.lightText2),
                             image: DecorationImage(
@@ -220,9 +235,15 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
-                      Text(
-                        categsH[index]['categ'],
-                        style: titleSmall.copyWith(fontWeight: FontWeight.w700),
+                      Padding(
+                        padding: index == 0
+                            ? EdgeInsets.only(left: 16.0.h)
+                            : const EdgeInsets.only(left: 0),
+                        child: Text(
+                          categsH[index]['categ'],
+                          style:
+                              titleSmall.copyWith(fontWeight: FontWeight.w700),
+                        ),
                       )
                     ],
                   );
@@ -237,16 +258,22 @@ class _HausaHomeState extends State<HausaHomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Recommended Plan',
-                  style: titleMedium.copyWith(fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.0.w),
+                  child: Text(
+                    'Recommended Plan',
+                    style: titleMedium.copyWith(fontWeight: FontWeight.w600),
+                  ),
                 ),
-                Text(
-                  'See All ',
-                  style: bodyLarge.copyWith(
-                      color: AppColors.appPrimary,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.appPrimary),
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0.w),
+                  child: Text(
+                    'See All ',
+                    style: bodyLarge.copyWith(
+                        color: AppColors.appPrimary,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.appPrimary),
+                  ),
                 ),
               ],
             ),
@@ -264,6 +291,8 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                       Container(
                         width: 150.0.w,
                         height: 150.0.h,
+                        margin:
+                            index == 0 ? EdgeInsets.only(left: 16.0.h) : null,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(recommended[index]['image']),
@@ -271,9 +300,15 @@ class _HausaHomeState extends State<HausaHomeScreen> {
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
-                      Text(
-                        recommended[index]['plans'],
-                        style: titleSmall.copyWith(fontWeight: FontWeight.w700),
+                      Padding(
+                        padding: index == 0
+                            ? EdgeInsets.only(left: 16.0.h)
+                            : const EdgeInsets.all(0),
+                        child: Text(
+                          recommended[index]['plans'],
+                          style:
+                              titleSmall.copyWith(fontWeight: FontWeight.w700),
+                        ),
                       )
                     ],
                   );

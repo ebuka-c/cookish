@@ -52,11 +52,14 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 11.0.h),
+        padding: EdgeInsets.symmetric(vertical: 11.0.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchTextField(controller: _igboFoodC),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              child: SearchTextField(controller: _igboFoodC),
+            ),
             SizedBox(height: 19.0.h),
             //builder1
             Stack(
@@ -78,14 +81,17 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            dishes,
-                            style: bodyMedium.copyWith(
-                                fontWeight: FontWeight.w700),
+                          Padding(
+                            padding: EdgeInsets.only(left: 16.0.w),
+                            child: Text(
+                              dishes,
+                              style: bodyMedium.copyWith(
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
                           Container(
                             height: 185.0.h,
-                            margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+                            margin: EdgeInsets.symmetric(horizontal: 16.0.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: AppColors.white,
@@ -103,17 +109,20 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                     },
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    //see all
-                    Get.toNamed(AppRoutes.igboAllDishes);
-                  },
-                  child: Text(
-                    'See All ',
-                    style: bodyLarge.copyWith(
-                        color: AppColors.appRed,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appRed),
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0.w),
+                  child: InkWell(
+                    onTap: () {
+                      //see all
+                      Get.toNamed(AppRoutes.igboAllDishes);
+                    },
+                    child: Text(
+                      'See All ',
+                      style: bodyLarge.copyWith(
+                          color: AppColors.appRed,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.appRed),
+                    ),
                   ),
                 )
               ],
@@ -123,29 +132,32 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                 currentIndex: _currentIndex,
                 length: 3),
             SizedBox(height: 22.0.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Categories',
-                  style: titleMedium.copyWith(fontWeight: FontWeight.w600),
-                ),
-                InkWell(
-                  onTap: () {
-                    //see all
-                    var color = AppColors.appRed;
-                    Get.toNamed(AppRoutes.allIgboCateg, arguments: color);
-                  },
-                  child: Text(
-                    'See All ',
-                    style: bodyLarge.copyWith(
-                        color: AppColors.appRed,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appRed),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    'Categories',
+                    style: titleMedium.copyWith(fontWeight: FontWeight.w600),
                   ),
-                )
-              ],
+                  InkWell(
+                    onTap: () {
+                      //see all
+                      var color = AppColors.appRed;
+                      Get.toNamed(AppRoutes.allIgboCateg, arguments: color);
+                    },
+                    child: Text(
+                      'See All ',
+                      style: bodyLarge.copyWith(
+                          color: AppColors.appRed,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.appRed),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(height: 14.0.h),
             //builder2
@@ -163,6 +175,8 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                       Container(
                         width: 150.0.w,
                         height: 150.0.h,
+                        margin:
+                            index == 0 ? EdgeInsets.only(left: 16.0.h) : null,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(categsI[index]['image']),
@@ -170,9 +184,15 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
-                      Text(
-                        categsI[index]['categ'],
-                        style: titleSmall.copyWith(fontWeight: FontWeight.w700),
+                      Padding(
+                        padding: index == 0
+                            ? EdgeInsets.only(left: 16.0.h)
+                            : const EdgeInsets.all(0),
+                        child: Text(
+                          categsI[index]['categ'],
+                          style:
+                              titleSmall.copyWith(fontWeight: FontWeight.w700),
+                        ),
                       )
                     ],
                   );
@@ -184,23 +204,26 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
             ),
             SizedBox(height: 16.0.h),
             //builder3
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Recommended Plan',
-                  style: titleMedium.copyWith(fontWeight: FontWeight.w600),
-                ),
-                InkWell(
-                  child: Text(
-                    'See All ',
-                    style: bodyLarge.copyWith(
-                        color: AppColors.appRed,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appRed),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recommended Plan',
+                    style: titleMedium.copyWith(fontWeight: FontWeight.w600),
                   ),
-                )
-              ],
+                  InkWell(
+                    child: Text(
+                      'See All ',
+                      style: bodyLarge.copyWith(
+                          color: AppColors.appRed,
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.appRed),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 211.0.h,
@@ -216,6 +239,8 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                       Container(
                         width: 150.0.w,
                         height: 150.0.h,
+                        margin:
+                            index == 0 ? EdgeInsets.only(left: 16.0.h) : null,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(recommended[index]['image']),
@@ -223,9 +248,15 @@ class _IgboHomeScreenState extends State<IgboHomeScreen> {
                             borderRadius: BorderRadius.circular(16)),
                       ),
                       SizedBox(height: 10.0.h),
-                      Text(
-                        recommended[index]['plans'],
-                        style: titleSmall.copyWith(fontWeight: FontWeight.w700),
+                      Padding(
+                        padding: index == 0
+                            ? EdgeInsets.only(left: 16.0.h)
+                            : const EdgeInsets.all(0),
+                        child: Text(
+                          recommended[index]['plans'],
+                          style:
+                              titleSmall.copyWith(fontWeight: FontWeight.w700),
+                        ),
                       )
                     ],
                   );

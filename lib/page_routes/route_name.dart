@@ -27,4 +27,7 @@ class AppRoutes {
   static const String hausaAll = "/hausaAll";
   static const String igboAllDishes = "/igboAllDishes";
   static const String yorubaAllDishes = "/yorubaAllDishes";
+
+  //feedback
+  static const String feedbackScreen = "/feedbackScreen";
 }

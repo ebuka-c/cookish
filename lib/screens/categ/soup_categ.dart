@@ -1,4 +1,5 @@
 import 'package:cookish/constants/custom_textstyles.dart';
+import 'package:cookish/page_routes/route_name.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +7,85 @@ import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 
-final _search = TextEditingController();
-
-class SoupCateg extends StatelessWidget {
+class SoupCateg extends StatefulWidget {
   const SoupCateg({super.key});
+
+  @override
+  State<SoupCateg> createState() => _SoupCategState();
+}
+
+class _SoupCategState extends State<SoupCateg>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _search = TextEditingController();
+
+  final List<Map<String, String>> soupList = [
+    {'name': 'Tuwon Shinkafa'},
+    {'name': 'Miyan Kuka'},
+    {'name': 'Miyan Taushe'},
+    {'name': 'Miyan Gyada'},
+    {'name': 'Obe Apon'},
+  ];
+
+  List<Map<String, String>> filteredSoupList = [];
+
+  late AnimationController _controller;
+  late List<Animation<Offset>> animations;
+  late Animation<double> fadeAnimation;
+  int? selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    animations = List.generate(
+      soupList.length,
+      (index) => Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: const Offset(0, 0),
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(index * 0.2, 1.0, curve: Curves.easeOut),
+        ),
+      ),
+    );
+
+    _controller.forward();
+    fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+
+    // Initialize filtered list with all items
+    filteredSoupList = List.from(soupList);
+
+    // Listen to search input
+    _search.addListener(_filterSoupList);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _search.removeListener(_filterSoupList);
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _filterSoupList() {
+    String query = _search.text.toLowerCase();
+    setState(() {
+      if (query.isEmpty) {
+        filteredSoupList = List.from(soupList);
+      } else {
+        filteredSoupList = soupList.where((soup) {
+          return soup['name']!.toLowerCase().contains(query);
+        }).toList();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +100,57 @@ class SoupCateg extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchTextField(controller: _search),
-            SizedBox(height: 52.0.h),
+            SearchTextField(
+              controller: _search,
+              hintText: "Search",
+            ),
+            SizedBox(height: 20.0.h),
             Text(
               'Soup',
               style: titleLarge.copyWith(
-                  color: priColor, fontWeight: FontWeight.w600),
-            )
+                color: priColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 30.0.h),
+            Expanded(
+              child: filteredSoupList.isEmpty
+                  ? Center(
+                      child: Text(
+                        "No related items for your search",
+                        style: bodyLarge.copyWith(color: Colors.grey),
+                      ),
+                    )
+                  : ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: filteredSoupList.length,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10.0.h),
+                      itemBuilder: (context, index) {
+                        return SlideTransition(
+                          position: animations[index % animations.length],
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.feedbackScreen);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: priColor,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: priColor, width: 1),
+                              ),
+                              child: Text(
+                                filteredSoupList[index]['name']!,
+                                style:
+                                    bodyLarge.copyWith(color: AppColors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),
