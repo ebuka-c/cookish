@@ -1,6 +1,6 @@
 name: cookish
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -35,7 +35,6 @@ flutter_launcher_icons:
   image_path: "assets/images/png/play_store_512.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
-
 flutter_native_splash:
   image: "assets/images/png/play_store_512.png"
   color: "#309F75"
@@ -50,8 +49,6 @@ flutter_native_splash:
     color: "#309F75"
     icon_background_color: "#309F75"
 
-
-
 # flutter_launcher_icons:play_store_512
 #   android: "launcher_icon"
 #   ios: true
@@ -61,7 +58,6 @@ flutter_native_splash:
 #   adaptive_icon_foreground: "#309F75"
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -74,10 +70,15 @@ flutter:
     - family: Campton
       fonts:
         - asset: assets/fonts/CamptonMedium.otf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
     - family: CamptonLight
       fonts:
         - asset: assets/fonts/CamptonLight.otf
+    #       - asset: fonts/TrajanPro_Bold.ttf
+    #         weight: 700
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700

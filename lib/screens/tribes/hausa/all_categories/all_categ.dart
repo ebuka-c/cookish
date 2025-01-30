@@ -1,11 +1,15 @@
-import 'package:cookish/page_routes/route_name.dart';
+import 'package:cookish/screens/app_data/hausa_data.dart';
+import 'package:cookish/screens/categ/breakfast_categ.dart';
+import 'package:cookish/screens/categ/soup_categ.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../constants/colors.dart';
 import '../../../../constants/custom_textstyles.dart';
+import '../../../categ/dessert_categ.dart';
+import '../../../categ/stew_categ.dart';
+import '../../../categ/swallow_categ.dart';
 
 class AllHausaCateg extends StatefulWidget {
   const AllHausaCateg({super.key});
@@ -21,8 +25,8 @@ class _AllHausaCategState extends State<AllHausaCateg>
   final List categList = [
     {'name': 'Soup', 'isAvailable': true},
     {'name': 'Stew', 'isAvailable': true},
-    {'name': 'Swallow', 'isAvailable': false},
-    {'name': 'Breakfast', 'isAvailable': false},
+    {'name': 'Swallow', 'isAvailable': true},
+    {'name': 'Breakfast', 'isAvailable': true},
     {'name': 'Dessert', 'isAvailable': true},
   ];
 
@@ -72,22 +76,33 @@ class _AllHausaCategState extends State<AllHausaCateg>
 
   void goToNext(int index) {
     if (index == 0) {
-      Get.toNamed(AppRoutes.soupCategH, arguments: widgetsColor);
+      Get.to(SoupCateg(priColor: widgetsColor, title: 'Soup'));
     }
     if (index == 1) {
-      Get.toNamed(AppRoutes.stewCategH, arguments: widgetsColor);
+      //StewCateg
+      Get.to(StewCateg(priColor: widgetsColor, title: 'Stew'));
     }
     if (index == 2) {
-      Get.toNamed(AppRoutes.swallowCategH, arguments: widgetsColor);
+      //
+      Get.to(SwallowCateg(priColor: widgetsColor, title: 'Swallow'));
     }
     if (index == 3) {
-      Get.toNamed(AppRoutes.breakfastCategH, arguments: widgetsColor);
+      Get.to(BreakfastCateg(priColor: widgetsColor, title: 'Breakfast'));
     }
     if (index == 4) {
-      Get.toNamed(AppRoutes.dessertCategH, arguments: widgetsColor);
+      //
+      Get.to(DessertCateg(priColor: widgetsColor, title: 'Dessert'));
     }
     // Navigate to the next screen
   }
+
+  final allRecipesLength = [
+    hausaStewList.length,
+    hausaSoupList.length,
+    hausaSwallowList.length,
+    hausaBreakfastList.length,
+    hausaStewList.length
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -143,12 +158,10 @@ class _AllHausaCategState extends State<AllHausaCateg>
                           Text(categList[index]['name'],
                               style:
                                   titleSmall.copyWith(color: AppColors.white)),
-                          if (categList[index]['isAvailable'])
-                            Text(
-                              '10 Recipes',
-                              style:
-                                  titleSmall.copyWith(color: AppColors.white),
-                            )
+                          Text(
+                            '${allRecipesLength[index]} Recipes',
+                            style: titleSmall.copyWith(color: AppColors.white),
+                          )
                         ],
                       ),
                     ),

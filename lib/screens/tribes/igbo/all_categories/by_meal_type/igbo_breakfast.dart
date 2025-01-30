@@ -5,19 +5,20 @@ import 'package:cookish/widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
-import '../app_data/hausa_data.dart';
+import '../../../../../constants/colors.dart';
+import '../../../../app_data/igbo_data.dart';
 
-class SwallowCateg extends StatefulWidget {
-  const SwallowCateg({super.key, required this.priColor, required this.title});
+class IgboBreakfastCateg extends StatefulWidget {
+  const IgboBreakfastCateg(
+      {super.key, required this.priColor, required this.title});
   final Color priColor;
   final String title;
 
   @override
-  State<SwallowCateg> createState() => _SwallowCategState();
+  State<IgboBreakfastCateg> createState() => _SoupCategState();
 }
 
-class _SwallowCategState extends State<SwallowCateg>
+class _SoupCategState extends State<IgboBreakfastCateg>
     with SingleTickerProviderStateMixin {
   final TextEditingController _search = TextEditingController();
   List<Map<String, dynamic>> filteredSoupList = [];
@@ -36,7 +37,7 @@ class _SwallowCategState extends State<SwallowCateg>
     );
 
     animations = List.generate(
-      hausaSwallowList.length,
+      igboBreakfastList.length,
       (index) => Tween<Offset>(
         begin: const Offset(0, 1),
         end: const Offset(0, 0),
@@ -54,7 +55,7 @@ class _SwallowCategState extends State<SwallowCateg>
     );
 
     // Initialize filtered list with all items
-    filteredSoupList = List.from(hausaSwallowList);
+    filteredSoupList = List.from(igboBreakfastList);
 
     // Listen to search input
     _search.addListener(_filterSoupList);
@@ -72,9 +73,9 @@ class _SwallowCategState extends State<SwallowCateg>
     String query = _search.text.toLowerCase();
     setState(() {
       if (query.isEmpty) {
-        filteredSoupList = List.from(hausaSwallowList);
+        filteredSoupList = List.from(igboBreakfastList);
       } else {
-        filteredSoupList = hausaSwallowList.where((soup) {
+        filteredSoupList = igboBreakfastList.where((soup) {
           return soup['name']!.toLowerCase().contains(query);
         }).toList();
       }

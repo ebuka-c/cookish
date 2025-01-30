@@ -1,11 +1,16 @@
-import 'package:cookish/page_routes/route_name.dart';
+import 'package:cookish/screens/app_data/Yoruba_data.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../constants/colors.dart';
 import '../../../../constants/custom_textstyles.dart';
+import 'by_meal_type/breakfast.dart';
+import 'by_meal_type/dessert.dart';
+import 'by_meal_type/drinks.dart';
+import 'by_meal_type/soups.dart';
+import 'by_meal_type/stews.dart';
+import 'by_meal_type/swallow.dart';
 
 class AllYorubaCateg extends StatefulWidget {
   const AllYorubaCateg({super.key});
@@ -21,8 +26,8 @@ class _AllYorubaCategState extends State<AllYorubaCateg>
   final List categList = [
     {'name': 'Soup', 'isAvailable': true},
     {'name': 'Stew', 'isAvailable': true},
-    {'name': 'Swallow', 'isAvailable': false},
-    {'name': 'Breakfast', 'isAvailable': false},
+    {'name': 'Swallow', 'isAvailable': true},
+    {'name': 'Breakfast', 'isAvailable': true},
     {'name': 'Dessert', 'isAvailable': true},
   ];
 
@@ -72,22 +77,38 @@ class _AllYorubaCategState extends State<AllYorubaCateg>
 
   void goToNext(int index) {
     if (index == 0) {
-      Get.toNamed(AppRoutes.soupCategH, arguments: widgetsColor);
+      Get.to(YorubaSoupCateg(priColor: widgetsColor, title: 'Soup'));
     }
     if (index == 1) {
-      Get.toNamed(AppRoutes.stewCategH, arguments: widgetsColor);
+      //StewCateg
+      Get.to(YorubaStewCateg(priColor: widgetsColor, title: 'Stew'));
     }
     if (index == 2) {
-      Get.toNamed(AppRoutes.swallowCategH);
+      //
+      Get.to(YorubaSwallowCateg(priColor: widgetsColor, title: 'Swallow'));
     }
     if (index == 3) {
-      Get.toNamed(AppRoutes.breakfastCategH);
+      Get.to(YorubaBreakfastCateg(priColor: widgetsColor, title: 'Breakfast'));
     }
     if (index == 4) {
-      Get.toNamed(AppRoutes.dessertCategH);
+      //
+      Get.to(YorubaDessertCateg(priColor: widgetsColor, title: 'Dessert'));
     }
+    if (index == 5) {
+      //
+      Get.to(YorubaDrinksCateg(priColor: widgetsColor, title: 'Drinks'));
+    }
+
     // Navigate to the next screen
   }
+
+  final allRecipesLength = [
+    yorubaSoupList.length,
+    yorubaStewList.length,
+    yorubaSwallowList.length,
+    yorubaBreakfastList.length,
+    yorubaDessertList.length
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +136,7 @@ class _AllYorubaCategState extends State<AllYorubaCateg>
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 185.0.h, horizontal: 15.0.w),
+        padding: EdgeInsets.symmetric(vertical: 135.0.h, horizontal: 15.0.w),
         child: ListView.separated(
             itemBuilder: (context, index) {
               return SlideTransition(
@@ -143,12 +164,10 @@ class _AllYorubaCategState extends State<AllYorubaCateg>
                           Text(categList[index]['name'],
                               style:
                                   titleSmall.copyWith(color: AppColors.white)),
-                          if (categList[index]['isAvailable'])
-                            Text(
-                              '10 Recipes',
-                              style:
-                                  titleSmall.copyWith(color: AppColors.white),
-                            )
+                          Text(
+                            '${allRecipesLength[index]} Recipes',
+                            style: titleSmall.copyWith(color: AppColors.white),
+                          )
                         ],
                       ),
                     ),

@@ -1,15 +1,86 @@
 import 'package:cookish/constants/custom_textstyles.dart';
+import 'package:cookish/screens/tribes/hausa/details_screen.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
+import '../app_data/hausa_data.dart';
 
-final _search = TextEditingController();
+class BreakfastCateg extends StatefulWidget {
+  const BreakfastCateg(
+      {super.key, required this.priColor, required this.title});
+  final Color priColor;
+  final String title;
 
-class BreakfastCateg extends StatelessWidget {
-  const BreakfastCateg({super.key});
+  @override
+  State<BreakfastCateg> createState() => _BreakfastCategState();
+}
+
+class _BreakfastCategState extends State<BreakfastCateg>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _search = TextEditingController();
+  List<Map<String, dynamic>> filteredSoupList = [];
+
+  late AnimationController _controller;
+  late List<Animation<Offset>> animations;
+  late Animation<double> fadeAnimation;
+  int? selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    animations = List.generate(
+      hausaBreakfastList.length,
+      (index) => Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: const Offset(0, 0),
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(index * 0.2, 1.0, curve: Curves.easeOut),
+        ),
+      ),
+    );
+
+    _controller.forward();
+    fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+
+    // Initialize filtered list with all items
+    filteredSoupList = List.from(hausaBreakfastList);
+
+    // Listen to search input
+    _search.addListener(_filterSoupList);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _search.removeListener(_filterSoupList);
+    _search.dispose();
+    super.dispose();
+  }
+
+  void _filterSoupList() {
+    String query = _search.text.toLowerCase();
+    setState(() {
+      if (query.isEmpty) {
+        filteredSoupList = List.from(hausaBreakfastList);
+      } else {
+        filteredSoupList = hausaBreakfastList.where((soup) {
+          return soup['name']!.toLowerCase().contains(query);
+        }).toList();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +95,71 @@ class BreakfastCateg extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchTextField(controller: _search),
-            SizedBox(height: 52.0.h),
+            SearchTextField(
+              controller: _search,
+              hintText: "Search",
+            ),
+            SizedBox(height: 20.0.h),
             Text(
-              'Breakfast',
+              widget.title,
               style: titleLarge.copyWith(
-                  color: priColor, fontWeight: FontWeight.w600),
-            )
+                color: priColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 30.0.h),
+            Expanded(
+              child: filteredSoupList.isEmpty
+                  ? Center(
+                      child: Text(
+                        "No related items for your search",
+                        style: bodyLarge.copyWith(color: Colors.grey),
+                      ),
+                    )
+                  : ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: filteredSoupList.length,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10.0.h),
+                      itemBuilder: (context, index) {
+                        return SlideTransition(
+                          position: animations[index % animations.length],
+                          child: InkWell(
+                            onTap: () {
+                              final soupName = filteredSoupList[index]['name'];
+                              final soupAlias =
+                                  filteredSoupList[index]['alias'];
+                              final soupIngredients =
+                                  filteredSoupList[index]['ingredients'];
+                              final preparationSteps =
+                                  filteredSoupList[index]['steps'];
+                              final image = filteredSoupList[index]['image'];
+                              Get.to(DetailsScreen(
+                                  name: soupName,
+                                  alias: soupAlias,
+                                  ingredients: soupIngredients,
+                                  steps: preparationSteps,
+                                  image: image));
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: widget.priColor,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: widget.priColor, width: 1),
+                              ),
+                              child: Text(
+                                filteredSoupList[index]['name']!,
+                                style:
+                                    bodyLarge.copyWith(color: AppColors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),

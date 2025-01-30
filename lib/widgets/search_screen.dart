@@ -18,7 +18,10 @@ class SearchScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.white,
         centerTitle: false,
-        title: SearchTextField(controller: searchCntrl),
+        title: SearchTextField(
+          controller: searchCntrl,
+          autofocus: true,
+        ),
       ),
     );
   }
