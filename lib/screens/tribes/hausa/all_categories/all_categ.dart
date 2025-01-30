@@ -1,4 +1,5 @@
 import 'package:cookish/page_routes/route_name.dart';
+import 'package:cookish/screens/categ/soup_categ.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,7 @@ class _AllHausaCategState extends State<AllHausaCateg>
 
   void goToNext(int index) {
     if (index == 0) {
-      Get.toNamed(AppRoutes.soupCategH, arguments: widgetsColor);
+      Get.to(SoupCateg(priColor: widgetsColor));
     }
     if (index == 1) {
       Get.toNamed(AppRoutes.stewCategH, arguments: widgetsColor);

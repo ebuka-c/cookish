@@ -13,8 +13,13 @@ final titleMedium = TextStyle(
     fontWeight: FontWeight.w400,
     color: AppColors.primaryText);
 
+final titleMedium2 = TextStyle(
+    fontSize: 20.0.w,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaryText);
+
 final titleSmall = TextStyle(
-    fontSize: 16.0.w,
+    fontSize: 16.0.h,
     fontWeight: FontWeight.w400,
     color: AppColors.primaryText);
 

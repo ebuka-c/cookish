@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/custom_textstyles.dart';
+import '../../../categ/soup_categ.dart';
 
 class AllIgboCateg extends StatefulWidget {
   const AllIgboCateg({super.key});
@@ -72,7 +73,7 @@ class _AllIgboCategState extends State<AllIgboCateg>
 
   void goToNext(int index) {
     if (index == 0) {
-      Get.toNamed(AppRoutes.soupCategH, arguments: widgetsColor);
+      Get.to(SoupCateg(priColor: widgetsColor));
     }
     if (index == 1) {
       Get.toNamed(AppRoutes.stewCategH, arguments: widgetsColor);

@@ -11,7 +11,6 @@ class AppRoutes {
   static const String hausaDishes = "/hausaDishes";
   //
   static const String allHausaCateg = "/allHausaCateg";
-  static const String soupCategH = "/soupCategH";
   static const String stewCategH = "/stewCategH";
   static const String swallowCategH = "/swallowCategH";
   static const String breakfastCategH = "/breakfastCategH";
@@ -29,5 +28,6 @@ class AppRoutes {
   static const String yorubaAllDishes = "/yorubaAllDishes";
 
   //feedback
-  static const String feedbackScreen = "/feedbackScreen";
+  // static const String feedbackScreen = "/feedbackScreen";
+  static const String detailsScreen = "/detailsScreen";
 }

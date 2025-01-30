@@ -1,14 +1,16 @@
 import 'package:cookish/constants/custom_textstyles.dart';
-import 'package:cookish/page_routes/route_name.dart';
+import 'package:cookish/screens/tribes/hausa/details_screen.dart';
 import 'package:cookish/utilities/extensions.dart';
 import 'package:cookish/widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
+import '../app_data.dart';
 
 class SoupCateg extends StatefulWidget {
-  const SoupCateg({super.key});
+  const SoupCateg({super.key, required this.priColor});
+  final Color priColor;
 
   @override
   State<SoupCateg> createState() => _SoupCategState();
@@ -17,16 +19,7 @@ class SoupCateg extends StatefulWidget {
 class _SoupCategState extends State<SoupCateg>
     with SingleTickerProviderStateMixin {
   final TextEditingController _search = TextEditingController();
-
-  final List<Map<String, String>> soupList = [
-    {'name': 'Tuwon Shinkafa'},
-    {'name': 'Miyan Kuka'},
-    {'name': 'Miyan Taushe'},
-    {'name': 'Miyan Gyada'},
-    {'name': 'Obe Apon'},
-  ];
-
-  List<Map<String, String>> filteredSoupList = [];
+  List<Map<String, dynamic>> filteredSoupList = [];
 
   late AnimationController _controller;
   late List<Animation<Offset>> animations;
@@ -42,7 +35,7 @@ class _SoupCategState extends State<SoupCateg>
     );
 
     animations = List.generate(
-      soupList.length,
+      hausaSoupList.length,
       (index) => Tween<Offset>(
         begin: const Offset(0, 1),
         end: const Offset(0, 0),
@@ -60,7 +53,7 @@ class _SoupCategState extends State<SoupCateg>
     );
 
     // Initialize filtered list with all items
-    filteredSoupList = List.from(soupList);
+    filteredSoupList = List.from(hausaSoupList);
 
     // Listen to search input
     _search.addListener(_filterSoupList);
@@ -78,9 +71,9 @@ class _SoupCategState extends State<SoupCateg>
     String query = _search.text.toLowerCase();
     setState(() {
       if (query.isEmpty) {
-        filteredSoupList = List.from(soupList);
+        filteredSoupList = List.from(hausaSoupList);
       } else {
-        filteredSoupList = soupList.where((soup) {
+        filteredSoupList = hausaSoupList.where((soup) {
           return soup['name']!.toLowerCase().contains(query);
         }).toList();
       }
@@ -131,14 +124,26 @@ class _SoupCategState extends State<SoupCateg>
                           position: animations[index % animations.length],
                           child: InkWell(
                             onTap: () {
-                              Get.toNamed(AppRoutes.feedbackScreen);
+                              final soupName = filteredSoupList[index]['name'];
+                              final soupAlias =
+                                  filteredSoupList[index]['alias'];
+                              final soupIngredients =
+                                  filteredSoupList[index]['ingredients'];
+                              final preparationSteps =
+                                  filteredSoupList[index]['steps'];
+                              Get.to(DetailsScreen(
+                                  name: soupName,
+                                  alias: soupAlias,
+                                  ingredients: soupIngredients,
+                                  steps: preparationSteps));
                             },
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: priColor,
+                                color: widget.priColor,
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: priColor, width: 1),
+                                border: Border.all(
+                                    color: widget.priColor, width: 1),
                               ),
                               child: Text(
                                 filteredSoupList[index]['name']!,

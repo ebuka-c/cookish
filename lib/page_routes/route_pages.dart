@@ -1,12 +1,11 @@
 import 'package:cookish/screens/auth/sign_up_screen.dart';
 import 'package:cookish/screens/categ/breakfast_categ.dart';
 import 'package:cookish/screens/categ/dessert_categ.dart';
-import 'package:cookish/screens/categ/soup_categ.dart';
 import 'package:cookish/screens/categ/stew_categ.dart';
 import 'package:cookish/screens/categ/swallow_categ.dart';
 import 'package:cookish/screens/nav_screens.dart/settings.dart';
 import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
-import 'package:cookish/screens/tribes/hausa/feedback_screen.dart';
+import 'package:cookish/screens/tribes/hausa/details_screen.dart';
 import 'package:cookish/screens/tribes/hausa/hausa_dishes.dart';
 import 'package:cookish/screens/tribes/igbo/all_categories/all_categ.dart';
 import 'package:cookish/screens/tribes/igbo/all_dishes/igbo_all.dart';
@@ -18,18 +17,12 @@ import 'package:cookish/screens/onboarding/onboarding2.dart';
 import 'package:cookish/screens/onboarding/onboarding_screen.dart';
 import 'package:cookish/screens/onboarding/splash2.dart';
 import 'package:get/get.dart';
-
 import '../screens/auth/login_screen.dart';
 import '../screens/tribes/hausa/all_dishes/hausa_all.dart';
 import 'route_name.dart';
 
 class RoutePages {
   static final List<GetPage> routes = [
-    // GetPage(
-    //     name: AppRoutes.splashScreen,
-    //     page: () => const SplashScreen(),
-    //     transition: Transition.fadeIn,
-    //     transitionDuration: const Duration(seconds: 1)),
     GetPage(
         name: AppRoutes.splash2,
         page: () => const Splash2(),
@@ -79,11 +72,11 @@ class RoutePages {
       page: () => const AllHausaCateg(),
       transition: Transition.fadeIn,
     ),
-    GetPage(
-      name: AppRoutes.soupCategH,
-      page: () => SoupCateg(),
-      transition: Transition.fadeIn,
-    ),
+    // GetPage(
+    //   name: AppRoutes.soupCategH,
+    //   page: () => SoupCateg(),
+    //   transition: Transition.fadeIn,
+    // ),
     GetPage(
       name: AppRoutes.stewCategH,
       page: () => const StewCateg(),
@@ -143,9 +136,14 @@ class RoutePages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: AppRoutes.feedbackScreen,
-      page: () => const FeedbackScreen(),
+      name: AppRoutes.detailsScreen,
+      page: () => DetailsScreen(),
       transition: Transition.fadeIn,
     ),
+    // GetPage(
+    //   name: AppRoutes.feedbackScreen,
+    //   page: () => const FeedbackScreen(),
+    //   transition: Transition.fadeIn,
+    // ),
   ];
 }
