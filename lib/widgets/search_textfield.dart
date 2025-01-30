@@ -11,6 +11,7 @@ class SearchTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.hintText,
+    this.autofocus,
     this.fillColor,
     this.suffixIcon,
     this.prefixIcon,
@@ -46,6 +47,7 @@ class SearchTextField extends StatelessWidget {
       focusedWidth,
       focusedRadius;
   final Function(String)? onChanged;
+  final bool? autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class SearchTextField extends StatelessWidget {
         child: TextField(
           style: bodyLarge,
           keyboardType: keyboardType,
+          autofocus: autofocus ?? false,
           onTapOutside: (PointerDownEvent event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
