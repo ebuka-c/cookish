@@ -1,8 +1,4 @@
 import 'package:cookish/screens/auth/sign_up_screen.dart';
-import 'package:cookish/screens/categ/breakfast_categ.dart';
-import 'package:cookish/screens/categ/dessert_categ.dart';
-import 'package:cookish/screens/categ/stew_categ.dart';
-import 'package:cookish/screens/categ/swallow_categ.dart';
 import 'package:cookish/screens/nav_screens.dart/settings.dart';
 import 'package:cookish/screens/tribes/hausa/all_categories/all_categ.dart';
 import 'package:cookish/screens/tribes/hausa/details_screen.dart';
@@ -72,31 +68,7 @@ class RoutePages {
       page: () => const AllHausaCateg(),
       transition: Transition.fadeIn,
     ),
-    // GetPage(
-    //   name: AppRoutes.soupCategH,
-    //   page: () => SoupCateg(),
-    //   transition: Transition.fadeIn,
-    // ),
-    GetPage(
-      name: AppRoutes.stewCategH,
-      page: () => const StewCateg(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: AppRoutes.swallowCategH,
-      page: () => const SwallowCateg(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: AppRoutes.breakfastCategH,
-      page: () => const BreakfastCateg(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: AppRoutes.dessertCategH,
-      page: () => const DessertCateg(),
-      transition: Transition.fadeIn,
-    ),
+
     //igbo
 
     GetPage(

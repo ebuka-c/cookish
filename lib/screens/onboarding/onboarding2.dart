@@ -80,7 +80,7 @@ class _Onboarding2State extends State<Onboarding2> {
                     curve: Curves.easeOut,
                     transform: Matrix4.translationValues(
                       slideOut && selectedIndex == 0
-                          ? -(screenWidth - 30) // Slide out to the left
+                          ? -(screenWidth - 100) // Slide out to the left
                           : (_animate
                               ? 0
                               : screenWidth), // Animate in from the right

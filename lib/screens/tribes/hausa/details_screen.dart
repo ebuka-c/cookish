@@ -8,8 +8,13 @@ import '../../../widgets/appbar_components.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen(
-      {super.key, this.name, this.alias, this.ingredients, this.steps});
-  final String? name, alias;
+      {super.key,
+      this.name,
+      this.alias,
+      this.ingredients,
+      this.steps,
+      this.image});
+  final String? name, alias, image;
   final List? ingredients, steps;
   @override
   Widget build(BuildContext context) {
@@ -39,9 +44,11 @@ class DetailsScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 311.0.h,
-              decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  // color: Colors.grey,
+                  image: DecorationImage(
+                      image: NetworkImage(image ?? ''), fit: BoxFit.cover),
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),
             ),
@@ -117,7 +124,47 @@ class DetailsScreen extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [],
+            children: [
+              Expanded(
+                child: Container(
+                    height: 57.0.h,
+                    // padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppColors.white,
+                      border: Border.all(color: AppColors.inactivePV),
+                    ),
+                    child: Center(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.check_circle_outline,
+                                color: AppColors.lightText2),
+                            SizedBox(width: 10.0.w),
+                            Text('Cooked',
+                                style: bodyLarge.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.primaryText))
+                          ]),
+                    )),
+              ),
+              SizedBox(width: 12.0.w),
+              //
+              Container(
+                  height: 57.0.h,
+                  padding: EdgeInsets.symmetric(horizontal: 44.0.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColors.activePV,
+                    border: Border.all(color: AppColors.inactivePV),
+                  ),
+                  child: Row(children: [
+                    Text('Start Cooking',
+                        style: bodyLarge.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.primaryText))
+                  ])),
+            ],
           ),
         ),
       ),

@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
-import '../app_data.dart';
+import '../app_data/hausa_data.dart';
 
 class SoupCateg extends StatefulWidget {
-  const SoupCateg({super.key, required this.priColor});
+  const SoupCateg({super.key, required this.priColor, required this.title});
   final Color priColor;
+  final String title;
 
   @override
   State<SoupCateg> createState() => _SoupCategState();
@@ -99,7 +100,7 @@ class _SoupCategState extends State<SoupCateg>
             ),
             SizedBox(height: 20.0.h),
             Text(
-              'Soup',
+              widget.title,
               style: titleLarge.copyWith(
                 color: priColor,
                 fontWeight: FontWeight.w600,
@@ -131,11 +132,13 @@ class _SoupCategState extends State<SoupCateg>
                                   filteredSoupList[index]['ingredients'];
                               final preparationSteps =
                                   filteredSoupList[index]['steps'];
+                              final image = filteredSoupList[index]['image'];
                               Get.to(DetailsScreen(
                                   name: soupName,
                                   alias: soupAlias,
                                   ingredients: soupIngredients,
-                                  steps: preparationSteps));
+                                  steps: preparationSteps,
+                                  image: image));
                             },
                             child: Container(
                               padding: const EdgeInsets.all(16),

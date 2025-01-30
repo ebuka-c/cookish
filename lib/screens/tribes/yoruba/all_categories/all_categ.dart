@@ -73,7 +73,7 @@ class _AllYorubaCategState extends State<AllYorubaCateg>
 
   void goToNext(int index) {
     if (index == 0) {
-      Get.to(SoupCateg(priColor: widgetsColor));
+      Get.to(SoupCateg(priColor: widgetsColor, title: 'Soup'));
     }
     if (index == 1) {
       Get.toNamed(AppRoutes.stewCategH, arguments: widgetsColor);
